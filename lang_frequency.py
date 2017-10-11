@@ -1,5 +1,4 @@
 import argparse
-import string
 from collections import Counter
 
 
@@ -13,19 +12,15 @@ def load_text(filepath):
 
 
 def delete_special_chars(text):
-    special_chars_string = string.punctuation
-    for char in special_chars_string:
-        text = text.replace(char, '')
+    for char in text:
+        if not char.isalnum():
+            text = text.replace(char, ' ')
     return text
 
 
 def get_most_frequent_words(text, count):
-    words_from_text = Counter(text.split())
-    return sorted(
-        words_from_text,
-        key=words_from_text.get,
-        reverse=True
-    )[:count]
+    words_counter = Counter(text.lower().split())
+    return [word for word, repeats in words_counter.most_common(count)]
 
 
 if __name__ == '__main__':
@@ -49,7 +44,7 @@ if __name__ == '__main__':
 
     arguments = argument_parser.parse_args()
     input_path = arguments.input
-    if input_path == '':
+    if not input_path:
         input_path = input('Specify a text file to analyze: ')
     words_number = arguments.number
     if words_number <= 0:
