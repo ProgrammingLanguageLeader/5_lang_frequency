@@ -1,5 +1,6 @@
 import argparse
 import string
+from collections import Counter
 
 
 def load_text(filepath):
@@ -19,18 +20,12 @@ def delete_special_chars(text):
 
 
 def get_most_frequent_words(text, count):
-    words_from_text = {}
-    for word in text.split():
-        if words_from_text.get(word.lower()):
-            words_from_text[word.lower()] += 1
-        else:
-            words_from_text[word.lower()] = 1
-    the_most_frequent_words = sorted(
+    words_from_text = Counter(text.split())
+    return sorted(
         words_from_text,
         key=words_from_text.get,
         reverse=True
     )[:count]
-    return the_most_frequent_words
 
 
 if __name__ == '__main__':
