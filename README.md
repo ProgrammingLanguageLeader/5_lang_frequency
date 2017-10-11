@@ -16,22 +16,22 @@ python lang_frequency.py -h
 ```
 python lang_frequency.py -n 4
 Specify a text file to analyze: file.txt
- 1. в
- 2. и
- 3. на
- 4. скрипт
+1. в
+2. и
+3. на
+4. скрипт
  
 python lang_frequency.py -i file.txt
- 1. в
- 2. и
- 3. на
- 4. скрипт
- 5. не
- 6. можно
- 7. такой
- 8. вход
- 9. должен
- 10. с
+1. в
+2. и
+3. на
+4. скрипт
+5. не
+6. можно
+7. такой
+8. вход
+9. должен
+10. с
 ```
 
 # Project Goals

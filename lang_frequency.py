@@ -2,11 +2,11 @@ import argparse
 import string
 
 
-def load_data(filepath):
+def load_text(filepath):
     try:
         with open(filepath, 'r', encoding='utf-8') as file:
-            data = file.read()
-        return data
+            text = file.read()
+        return text
     except IOError:
         return None
 
@@ -33,23 +33,18 @@ def get_most_frequent_words(text, count):
     return the_most_frequent_words
 
 
-def print_the_most_frequent_words(words_list):
-    for index, word in enumerate(words_list):
-        print(' {}. {}'.format(index + 1, word))
-
-
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(
+    argument_parser = argparse.ArgumentParser(
         description='The script calculates a frequency of words '
                     'in the text and outputs the most popular words'
     )
-    parser.add_argument(
+    argument_parser.add_argument(
         '-i',
         '--input',
         default='',
         help='A path to the file containing text to analyze',
     )
-    parser.add_argument(
+    argument_parser.add_argument(
         '-n',
         '--number',
         type=int,
@@ -57,19 +52,18 @@ if __name__ == '__main__':
         help='A number of popular words that will be printed by the program'
     )
 
-    args = parser.parse_args()
-    input_path = args.input
+    arguments = argument_parser.parse_args()
+    input_path = arguments.input
     if input_path == '':
         input_path = input('Specify a text file to analyze: ')
-    words_number = args.number
+    words_number = arguments.number
     if words_number <= 0:
-        print('-n parameter must be positive')
-        exit(0)
+        exit('-n parameter must be positive')
 
-    raw_text = load_data(input_path)
+    raw_text = load_text(input_path)
     if not raw_text:
-        print('Check an input file')
-        exit(0)
+        exit('Check an input file')
     text = delete_special_chars(raw_text)
     the_most_frequent_words = get_most_frequent_words(text, words_number)
-    print_the_most_frequent_words(the_most_frequent_words)
+    for index, word in enumerate(the_most_frequent_words):
+        print('{}. {}'.format(index + 1, word))
