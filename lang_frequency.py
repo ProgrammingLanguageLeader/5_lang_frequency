@@ -73,4 +73,3 @@ if __name__ == '__main__':
     text = delete_special_chars(raw_text)
     the_most_frequent_words = get_most_frequent_words(text, words_number)
     print_the_most_frequent_words(the_most_frequent_words)
-
